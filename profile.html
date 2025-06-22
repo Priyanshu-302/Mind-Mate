@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="profile.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="android-chrome-512x512.png"
+    />
+    <title>Profile | MindMate</title>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="toggle-wrapper">
+        <label class="switch" title="Toggle Dark Mode">
+          <input type="checkbox" id="theme-toggle" />
+          <span class="slider"></span>
+        </label>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <div class="profile-container">
+      <div class="profile-header">
+        <img src="https://via.placeholder.com/90" alt="Profile Picture" />
+        <h1>User Profile</h1>
+      </div>
+
+      <form class="profile-form" onsubmit="saveProfile(event)">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" />
+        </div>
+
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" />
+        </div>
+
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="contact">Contact Number</label>
+          <input type="tel" id="contact" placeholder="e.g., +91 9876543210" />
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" />
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Short Bio</label>
+          <textarea
+            id="bio"
+            rows="4"
+            placeholder="Tell us something about yourself..."
+          ></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="save-btn">Save Changes</button>
+          <button
+            type="button"
+            class="back-btn"
+            onclick="window.location.href='dashboard.html'"
+          >
+            Back
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // Load dark mode preference
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        document.getElementById("theme-toggle").checked = true;
+      }
+
+      document
+        .getElementById("theme-toggle")
+        .addEventListener("change", function () {
+          document.body.classList.toggle("dark-mode");
+          localStorage.setItem("theme", this.checked ? "dark" : "light");
+        });
+
+      // Save all profile fields to localStorage
+      function saveProfile(event) {
+        event.preventDefault();
+
+        const fields = [
+          "name",
+          "email",
+          "dob",
+          "gender",
+          "contact",
+          "city",
+          "bio",
+        ];
+
+        fields.forEach((field) => {
+          const value = document.getElementById(field).value.trim();
+          localStorage.setItem(`profile_${field}`, value);
+        });
+
+        // Also update the displayed username used in dashboard
+        const username = document.getElementById("name").value.trim();
+        localStorage.setItem("username", username);
+
+        alert("✅ Profile saved successfully!");
+
+        // Redirect to dashboard
+        window.location.href = "dashboard.html";
+      }
+
+      // Load saved profile data on page load (excluding email)
+      window.onload = function () {
+        const fields = ["name", "dob", "gender", "contact", "city", "bio"]; // ⛔ email excluded
+
+        fields.forEach((field) => {
+          const saved = localStorage.getItem(`profile_${field}`);
+          if (saved) document.getElementById(field).value = saved;
+        });
+      };
+
+      // Logout with confirmation
+      function logout() {
+        const confirmLogout = confirm("Are you sure you want to log out?");
+        if (confirmLogout) {
+          localStorage.removeItem("username");
+          window.location.href = "landing.html";
+        }
+      }
+    </script>
+  </body>
+</html>

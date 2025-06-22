@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mood Journal | MindMate</title>
+    <link rel="stylesheet" href="mood.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="android-chrome-512x512.png"
+    />
+  </head>
+  <body>
+    <div class="toggle-wrapper">
+      <label class="switch">
+        <input type="checkbox" id="theme-toggle" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="journal-container">
+      <h1>Mood Journal</h1>
+
+      <form class="journal-form" onsubmit="saveEntry(event)">
+        <label for="date">Date</label>
+        <input type="date" id="date" required />
+
+        <label for="mood">Current Mood</label>
+        <select id="mood" required>
+          <option value="">Select your mood</option>
+          <option value="Happy">😊 Happy</option>
+          <option value="Sad">😢 Sad</option>
+          <option value="Anxious">😟 Anxious</option>
+          <option value="Excited">😃 Excited</option>
+          <option value="Angry">😠 Angry</option>
+          <option value="Tired">😴 Tired</option>
+        </select>
+
+        <label for="note">Your Thoughts</label>
+        <textarea
+          id="note"
+          placeholder="Write about your day or feelings..."
+        ></textarea>
+
+        <div class="button-group">
+          <button type="submit" class="save-entry">Save Entry</button>
+          <button
+            type="button"
+            class="back-btn"
+            onclick="window.location.href='dashboard.html'"
+          >
+            Back
+          </button>
+        </div>
+
+        <!--This gives suggestion based on the mood-->
+        <div id="suggestion"></div>
+      </form>
+    </div>
+
+    <script>
+      // Enable dark mode on load if previously selected
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        const toggle = document.getElementById("theme-toggle");
+        if (toggle) toggle.checked = true;
+      }
+
+      // Dark mode toggle logic
+      const themeToggle = document.getElementById("theme-toggle");
+      if (themeToggle) {
+        themeToggle.addEventListener("change", function () {
+          document.body.classList.toggle("dark-mode");
+          localStorage.setItem("theme", this.checked ? "dark" : "light");
+        });
+      }
+
+      function saveEntry(event) {
+        event.preventDefault();
+
+        const date = document.getElementById("date").value;
+        const mood = document.getElementById("mood").value;
+        const note = document.getElementById("note").value.trim();
+
+        if (!date || !mood) {
+          alert("Please fill in the date and mood.");
+          return;
+        }
+
+        const entry = { date, mood, note };
+        const existing = JSON.parse(localStorage.getItem("mood_journal")) || [];
+        existing.unshift(entry);
+        localStorage.setItem("mood_journal", JSON.stringify(existing));
+
+        document.getElementById("date").value = "";
+        document.getElementById("mood").value = "";
+        document.getElementById("note").value = "";
+
+        // Mood-based suggestion
+        const moodSuggestions = {
+          Happy: "Keep doing what brings you joy! 😊",
+          Sad: "Take time for yourself and talk to someone you trust. 💙",
+          Anxious: "Try breathing exercises or journaling your worries. 🌿",
+          Excited:
+            "Capture this excitement and share your energy with others! ✨",
+          Angry:
+            "Take deep breaths and step away from what's bothering you. 🔥",
+          Tired: "Give yourself permission to rest. Your body deserves it. 😴",
+        };
+        const suggestionText =
+          moodSuggestions[mood] || "Thanks for sharing your thoughts.";
+        document.getElementById("suggestion").textContent = suggestionText;
+
+        loadEntries();
+      }
+
+      function loadEntries() {
+        const container = document.getElementById("entries");
+        const entries = JSON.parse(localStorage.getItem("mood_journal")) || [];
+        container.innerHTML = "";
+
+        entries.forEach((entry) => {
+          const div = document.createElement("div");
+          div.className = "entry";
+          div.innerHTML = `
+          <h3>${entry.mood}</h3>
+          <small>${entry.date}</small>
+          <p>${entry.note}</p>
+        `;
+          container.appendChild(div);
+        });
+      }
+
+      window.onload = loadEntries;
+    </script>
+  </body>
+</html>

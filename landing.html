@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mind Mate | Home</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="landing.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="android-chrome-512x512.png"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Mind Mate</div>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <a href="#">Login</a>
+        <a href="#">Sign Up</a>
+        <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <h1>
+        Gamify Your Mental Wellness Journey With
+        <span style="color: var(--primary)">Mind Mate</span>
+      </h1>
+      <p>
+        Your AI-powered friend for daily mood tracking, mental health check-ins,
+        and self-growth challenges.
+      </p>
+      <div class="cta-buttons">
+        <a href="#">Start Your Journey</a>
+        <a href="#features">Learn More</a>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="feature-card">
+        <h3>🎮 Gamified Dashboard</h3>
+        <p>
+          Level up with XP, earn streaks, and unlock badges as you stay mentally
+          fit.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>📊 Mood Journal</h3>
+        <p>
+          Track your daily moods, reflect, and analyze trends over time with
+          ease.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>🤖 AI Check-in Bot</h3>
+        <p>
+          Engage in conversations with our intelligent assistant for tailored
+          emotional support.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>🏆 Weekly Self-Care Goals</h3>
+        <p>
+          Stay motivated with weekly tasks that reward your effort and
+          consistency.
+        </p>
+      </div>
+      <div class="feature-card">
+        <h3>📍 Nearby Clinics</h3>
+        <p>
+          Quick access to mental health support centers close to your location.
+        </p>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <h2>Why Mind Mate?</h2>
+      <p>
+        We believe mental health should be fun, engaging, and personalized. Mind
+        Mate brings gamification, technology, and empathy together to help you
+        track, reflect, and grow. Whether you're dealing with anxiety, burnout,
+        or just want to understand your mood patterns—Mind Mate is here for you
+        24/7.
+      </p>
+    </section>
+
+    <section class="testimonials" id="testimonials">
+      <h2>What Our Users Say</h2>
+      <blockquote>
+        “Mind Mate helped me turn my life around. I started tracking my moods
+        and now I have full control over my emotions.” –
+        <strong>Aryan, Student</strong>
+      </blockquote>
+      <blockquote>
+        “The gamification made it fun. I actually look forward to logging in
+        every day!” – <strong>Divya, Software Engineer</strong>
+      </blockquote>
+    </section>
+
+    <section class="faq" id="faq">
+      <div class="faq-card">
+        <h3>Is Mind Mate free to use?</h3>
+        <p>Yes! The core features are completely free.</p>
+      </div>
+      <div class="faq-card">
+        <h3>Is my data private?</h3>
+        <p>
+          Absolutely. Your mental health data is encrypted and never shared
+          without your permission.
+        </p>
+      </div>
+      <div class="faq-card">
+        <h3>Can I use this with a therapist?</h3>
+        <p>
+          Yes! You can export your journal and trends to share with your
+          therapist.
+        </p>
+      </div>
+      <div class="faq-card">
+        <h3>Do I need to install anything?</h3>
+        <p>
+          Nope! Mind Mate is web-based and works on all modern browsers and
+          devices.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      &copy; 2025 Mind Mate | Your Personal Mental Wellness Platform
+    </footer>
+
+    <script>
+      function toggleTheme() {
+        const html = document.documentElement;
+        const theme = html.getAttribute("data-theme");
+        html.setAttribute("data-theme", theme === "dark" ? "light" : "dark");
+      }
+    </script>
+  </body>
+</html>

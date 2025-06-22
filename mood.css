@@ -1,0 +1,206 @@
+body {
+  background-color: #f9f9fb;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.journal-container {
+  max-width: 800px;
+  padding: 32px;
+  margin: 48px auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.journal-container h1 {
+  text-align: center;
+  color: #6c63ff;
+  margin-bottom: 24px;
+  font-size: 32px;
+}
+
+.journal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.journal-form label {
+  font-weight: 600;
+  color: #444;
+}
+
+.journal-form input,
+.journal-form select,
+.journal-form textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.button-group {
+  display: flex;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.save-entry,
+.back-btn {
+  background-color: #6c63ff;
+  color: white;
+  padding: 12px 32px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  align-self: flex-start;
+}
+
+.save-entry {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.save-entry:hover {
+  background-color: #554ed1;
+}
+
+.back-btn {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.back-btn:hover {
+  background-color: #cccccc;
+}
+
+body.dark-mode {
+  background-color: #1e1e2f;
+  color: #eee;
+}
+
+body.dark-mode .journal-container {
+  background-color: #2c2c3e;
+}
+
+body.dark-mode .journal-form label,
+body.dark-mode .journal-container h1 {
+  color: #9fa8ff;
+}
+
+body.dark-mode textarea,
+body.dark-mode select,
+body.dark-mode input[type="date"] {
+  background-color: #1e1e2f;
+  color: white;
+  border: 1px solid #666;
+}
+
+body.dark-mode .entry {
+  background-color: #1e1e2f;
+  border-left: 5px solid #9fa8ff;
+}
+
+body.dark-mode #suggestion {
+  color: #333;
+}
+
+body.dark-mode .back-btn {
+  background-color: #444;
+  color: #eee;
+}
+
+body.dark-mode .back-btn:hover {
+  background-color: #555;
+}
+
+.toggle-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 2rem 0 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 26px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #6c63ff;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
+/* Suggestion message after mood is submitted */
+#suggestion {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  border-left: 5px solid #6c63ff;
+  background-color: #f1f0ff;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.entries-section {
+  margin-top: 2.5rem;
+}
+
+.entry {
+  background-color: #f9f9fb;
+  border-left: 5px solid #6c63ff;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.entry h3 {
+  margin-bottom: 0.3rem;
+  color: #6c63ff;
+}
+
+.entry small {
+  color: #999;
+}
+
+#suggestion {
+  margin-top: 1.5rem;
+  font-weight: 500;
+  color: #444;
+}
