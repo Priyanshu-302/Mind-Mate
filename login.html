@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,61 +20,13 @@
       sizes="512x512"
       href="android-chrome-512x512.png"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <title>Login | MindMate</title>
   </head>
   <body>
-    <div class="login-container">
-      <h2>Login</h2>
-      <form onsubmit="loginUser(event)">
-        <div class="form-div">
-          <label for="username">Username</label>
-          <input type="text" id="username" required />
-        </div>
-
-        <div class="form-div">
-          <label for="password">Password</label>
-          <input type="password" id="password" required />
-        </div>
-
-        <div class="form-div">
-          <button class="login-btn" type="submit">Log In</button>
-        </div>
-
-        <div class="extra-links">
-          Don't have an account? <a href="signup.html">Sign up</a>
-        </div>
-      </form>
-    </div>
-
-    <script>
-      function loginUser(event) {
-        event.preventDefault();
-
-        const username = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value.trim();
-
-        if (!username || !password) {
-          alert("Please enter both username and password.");
-          return;
-        }
-
-        // Set the app-wide username (for dashboard welcome message)
-        localStorage.setItem("username", username);
-
-        // If email was saved during signup, retrieve it
-        const email = localStorage.getItem("profile_email");
-
-        // If no email saved, use username as a fallback
-        const emailToSave =
-          email || `${username.toLowerCase().replace(/\s+/g, "")}@example.com`;
-
-        // Update profile storage (for use in profile page)
-        localStorage.setItem("profile_name", username);
-        localStorage.setItem("profile_email", emailToSave);
-
-        // Redirect to dashboard
-        window.location.href = "dashboard.html";
-      }
-    </script>
+    
   </body>
 </html>
