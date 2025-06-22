@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="landing.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
@@ -25,6 +25,11 @@
       sizes="512x512"
       href="android-chrome-512x512.png"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="landing.css">
   </head>
   <body>
     <header>
@@ -41,50 +46,50 @@
     </header>
 
     <section class="hero">
-      <h1>
+      <h1 data-aos="zoom-in">
         Gamify Your Mental Wellness Journey With
         <span style="color: var(--primary)">Mind Mate</span>
       </h1>
-      <p>
+      <p data-aos="fade-up">
         Your AI-powered friend for daily mood tracking, mental health check-ins,
         and self-growth challenges.
       </p>
-      <div class="cta-buttons">
+      <div class="cta-buttons" data-aos="fade-up" data-aos-delay="200">
         <a href="#">Start Your Journey</a>
         <a href="#features">Learn More</a>
       </div>
     </section>
 
     <section class="features" id="features">
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
         <h3>🎮 Gamified Dashboard</h3>
         <p>
           Level up with XP, earn streaks, and unlock badges as you stay mentally
           fit.
         </p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
         <h3>📊 Mood Journal</h3>
         <p>
           Track your daily moods, reflect, and analyze trends over time with
           ease.
         </p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
         <h3>🤖 AI Check-in Bot</h3>
         <p>
           Engage in conversations with our intelligent assistant for tailored
           emotional support.
         </p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
         <h3>🏆 Weekly Self-Care Goals</h3>
         <p>
           Stay motivated with weekly tasks that reward your effort and
           consistency.
         </p>
       </div>
-      <div class="feature-card">
+      <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
         <h3>📍 Nearby Clinics</h3>
         <p>
           Quick access to mental health support centers close to your location.
@@ -92,63 +97,63 @@
       </div>
     </section>
 
-    <section class="about" id="about">
+    <section class="about" id="about" data-aos="fade-in">
       <h2>Why Mind Mate?</h2>
       <p>
         We believe mental health should be fun, engaging, and personalized. Mind
         Mate brings gamification, technology, and empathy together to help you
-        track, reflect, and grow. Whether you're dealing with anxiety, burnout,
-        or just want to understand your mood patterns—Mind Mate is here for you
-        24/7.
+        track, reflect, and grow.
       </p>
     </section>
 
     <section class="testimonials" id="testimonials">
-      <h2>What Our Users Say</h2>
-      <blockquote>
-        “Mind Mate helped me turn my life around. I started tracking my moods
-        and now I have full control over my emotions.” –
+      <h2 data-aos="fade-right">What Our Users Say</h2>
+      <blockquote data-aos="zoom-in">
+        “Mind Mate helped me turn my life around...” –
         <strong>Aryan, Student</strong>
       </blockquote>
-      <blockquote>
-        “The gamification made it fun. I actually look forward to logging in
-        every day!” – <strong>Divya, Software Engineer</strong>
+      <blockquote data-aos="zoom-in" data-aos-delay="100">
+        “The gamification made it fun...” –
+        <strong>Divya, Software Engineer</strong>
       </blockquote>
     </section>
 
     <section class="faq" id="faq">
-      <div class="faq-card">
+      <div class="faq-card" data-aos="fade-up">
         <h3>Is Mind Mate free to use?</h3>
         <p>Yes! The core features are completely free.</p>
       </div>
-      <div class="faq-card">
+      <div class="faq-card" data-aos="fade-up" data-aos-delay="100">
         <h3>Is my data private?</h3>
         <p>
-          Absolutely. Your mental health data is encrypted and never shared
-          without your permission.
+          Absolutely. Your mental health data is encrypted and never shared.
         </p>
       </div>
-      <div class="faq-card">
+      <div class="faq-card" data-aos="fade-up" data-aos-delay="200">
         <h3>Can I use this with a therapist?</h3>
         <p>
-          Yes! You can export your journal and trends to share with your
-          therapist.
+          You can export your journal and trends to share with your therapist.
         </p>
       </div>
-      <div class="faq-card">
+      <div class="faq-card" data-aos="fade-up" data-aos-delay="300">
         <h3>Do I need to install anything?</h3>
-        <p>
-          Nope! Mind Mate is web-based and works on all modern browsers and
-          devices.
-        </p>
+        <p>Nope! Mind Mate is web-based and works on all modern devices.</p>
       </div>
+    </section>
+
+    <section class="cta-highlight" data-aos="zoom-in">
+      <h2>Start Your Journey Toward Better Mental Health</h2>
+      <p>Join thousands of users leveling up their emotional well-being.</p>
+      <a href="login.html" class="cta-button">Join Now — It's Free!</a>
     </section>
 
     <footer>
       &copy; 2025 Mind Mate | Your Personal Mental Wellness Platform
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+      AOS.init();
       function toggleTheme() {
         const html = document.documentElement;
         const theme = html.getAttribute("data-theme");
