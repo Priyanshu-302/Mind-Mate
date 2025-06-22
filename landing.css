@@ -18,6 +18,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -28,9 +29,6 @@ body {
 }
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,12 +36,28 @@ header {
   background-color: var(--card);
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  animation: slideDown 0.8s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--primary);
+  animation: fadeZoom 1s ease forwards;
 }
 
 nav a {
@@ -55,7 +69,8 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--primary);
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent);
 }
 
 .toggle-theme {
@@ -65,6 +80,11 @@ nav a:hover {
   border-radius: 20px;
   background-color: transparent;
   color: var(--primary);
+  transition: 0.3s ease;
+}
+
+.toggle-theme:hover {
+  background-color: #caf0f8;
 }
 
 .hero {
@@ -74,12 +94,14 @@ nav a:hover {
   align-items: center;
   text-align: center;
   padding: 4rem 2rem;
+  background: radial-gradient(ellipse at top, #e0f7fa, transparent 70%);
 }
 
 .hero h1 {
   font-size: 2.8rem;
   max-width: 800px;
   line-height: 1.3;
+  animation: fadeZoom 1s ease-in-out forwards;
 }
 
 .hero p {
@@ -87,10 +109,12 @@ nav a:hover {
   font-size: 1.2rem;
   max-width: 600px;
   color: #64748b;
+  animation: fadeIn 1.5s ease-in-out forwards;
 }
 
 .cta-buttons {
   margin-top: 2rem;
+  animation: fadeInUp 1.7s ease forwards;
 }
 
 .cta-buttons a {
@@ -101,11 +125,14 @@ nav a:hover {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  transition: 0.3s;
+  box-shadow: 0 0 0px transparent;
+  transition: all 0.3s ease-in-out;
 }
 
 .cta-buttons a:hover {
   background-color: var(--accent);
+  transform: scale(1.05);
+  box-shadow: 0 0 12px var(--accent);
 }
 
 .features,
@@ -129,7 +156,7 @@ nav a:hover {
   border-radius: 14px;
   padding: 2rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  transition: 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .feature-card:hover,
@@ -175,9 +202,66 @@ nav a:hover {
   padding-left: 1rem;
 }
 
+.cta-highlight {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--card);
+}
+
+.cta-highlight h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.cta-highlight p {
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.cta-highlight .cta-button {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
 footer {
   text-align: center;
   padding: 2rem;
   font-size: 0.9rem;
   color: #94a3b8;
+}
+
+@keyframes fadeZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
