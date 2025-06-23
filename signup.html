@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="signup.css" />
+    <link rel="stylesheet" href="login.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
@@ -20,55 +20,56 @@
       sizes="512x512"
       href="android-chrome-512x512.png"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <title>Sign Up | MindMate</title>
   </head>
   <body>
-    <div class="signup-container">
-      <h2>Create Your Account</h2>
-      <form onsubmit="SignUpUser(event)">
-        <div class="form-div">
-          <label for="username">Username</label>
-          <input type="text" id="username" required />
+    <div class="login-container">
+      <div class="login-card" data-aos="zoom-in">
+        <h2>Create your <span>Account</span></h2>
+        <form>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              placeholder="Enter Your Username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter Your Email"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter Your Password"
+              required
+            />
+          </div>
+          <button type="submit" class="login-btn">Sign Up</button>
+        </form>
+        <div class="switch-link">
+          Already have an account? <a href="login.html">Login</a>
         </div>
-
-        <div class="form-div">
-          <label for="email">Email</label>
-          <input type="email" id="email" required />
-        </div>
-
-        <div class="form-div">
-          <label for="password">Password</label>
-          <input type="password" id="password" required />
-        </div>
-
-        <div class="form-div">
-          <button class="signup-btn" type="submit">Sign Up</button>
-        </div>
-
-        <div class="extra-links">
-          Already have an account? <a href="login.html">Log in</a>
-        </div>
-      </form>
+      </div>
     </div>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      function SignUpUser(event) {
-        event.preventDefault(); // prevent default form action
-
-        const username = document.getElementById("username").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value.trim();
-
-        if (!username || !email || !password) {
-          alert("Please fill in all fields.");
-          return;
-        }
-
-        // Save details to localStorage (mock signup)
-        localStorage.setItem("username", username);
-        localStorage.setItem("profile_email", email);
-        window.location.href = "login.html"; // redirect to login after signup
-      }
+      AOS.init();
     </script>
   </body>
 </html>
