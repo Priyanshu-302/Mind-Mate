@@ -32,7 +32,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 3rem;
+  padding: 1.5rem 2rem;
   background-color: var(--card);
   backdrop-filter: blur(12px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -42,17 +42,6 @@ header {
   animation: slideDown 0.8s ease forwards;
 }
 
-@keyframes slideDown {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
 .logo {
   font-size: 1.8rem;
   font-weight: 700;
@@ -60,8 +49,13 @@ header {
   animation: fadeZoom 1s ease forwards;
 }
 
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 nav a {
-  margin-left: 2rem;
   text-decoration: none;
   font-weight: 600;
   color: var(--text);
@@ -85,6 +79,36 @@ nav a:hover {
 
 .toggle-theme:hover {
   background-color: #caf0f8;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    background-color: var(--bg);
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
 }
 
 .hero {
@@ -115,11 +139,14 @@ nav a:hover {
 .cta-buttons {
   margin-top: 2rem;
   animation: fadeInUp 1.7s ease forwards;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .cta-buttons a {
   padding: 0.75rem 1.5rem;
-  margin: 0 1rem;
   border-radius: 10px;
   background-color: var(--primary);
   color: white;
@@ -133,6 +160,48 @@ nav a:hover {
   background-color: var(--accent);
   transform: scale(1.05);
   box-shadow: 0 0 12px var(--accent);
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .features,
@@ -233,35 +302,4 @@ footer {
   padding: 2rem;
   font-size: 0.9rem;
   color: #94a3b8;
-}
-
-@keyframes fadeZoom {
-  0% {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
