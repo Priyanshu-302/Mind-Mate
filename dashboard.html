@@ -65,10 +65,80 @@
         <div class="profile-info">
           <h3>Priyanshu Das</h3>
           <p>dasp98458@gmail.com</p>
-          <button class="edit-btn">Edit Profile</button>
+          <button class="edit-btn" onclick="openProfileModal()">
+            Edit Profile
+          </button>
         </div>
       </div>
     </section>
+
+    <div id="editProfileModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeProfileModal()">&times;</span>
+        <h2>Edit Profile</h2>
+        <form onsubmit="saveProfile(event)">
+          <label for="editName">Name</label>
+          <input
+            type="text"
+            id="editName"
+            placeholder="Enter your name"
+            required
+          />
+
+          <label for="editEmail">Email</label>
+          <input
+            type="email"
+            id="editEmail"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label for="editGender">Gender</label>
+          <select id="editGender" onchange="updateAvatarPreview()">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="editDOB">Date of Birth</label>
+          <input type="date" id="editDOB" />
+
+          <label for="editBio">Bio</label>
+          <textarea
+            id="editBio"
+            placeholder="Tell us a bit about yourself..."
+            rows="3"
+          ></textarea>
+
+          <label for="editTheme">Preferred Theme</label>
+          <select id="editTheme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+
+          <div class="avatar-preview-wrapper">
+            <label>Avatar Preview</label><br />
+            <img
+              id="avatarPreview"
+              src="https://i.pravatar.cc/100?img=1"
+              class="avatar"
+            />
+          </div>
+
+          <div style="margin-top: 1rem">
+            <button type="submit" class="save-btn">Save</button>
+            <button
+              type="button"
+              class="save-btn"
+              style="background: #ccc; color: #000"
+              onclick="closeProfileModal()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <main class="dashboard">
       <div class="card" data-aos="fade-up">
@@ -151,6 +221,16 @@
       window.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem("theme") || "light";
         document.documentElement.setAttribute("data-theme", savedTheme);
+
+        // Load saved profile info
+        const name = localStorage.getItem("username") || "Mind Mate User";
+        const email = localStorage.getItem("email") || "user@example.com";
+        const avatar =
+          localStorage.getItem("avatar") || "https://i.pravatar.cc/100?img=3";
+
+        document.querySelector(".profile-info h3").textContent = name;
+        document.querySelector(".profile-info p").textContent = email;
+        document.querySelector(".avatar").src = avatar;
       });
 
       function toggleTheme() {
@@ -182,6 +262,67 @@
       function toggleChatbot() {
         const modal = document.getElementById("chatbotModal");
         modal.classList.toggle("show");
+      }
+
+      function openProfileModal() {
+        const modal = document.getElementById("editProfileModal");
+
+        document.getElementById("editName").value =
+          localStorage.getItem("username") || "";
+        document.getElementById("editEmail").value =
+          localStorage.getItem("email") || "";
+        document.getElementById("editGender").value =
+          localStorage.getItem("gender") || "male";
+        document.getElementById("editDOB").value =
+          localStorage.getItem("dob") || "";
+        document.getElementById("editBio").value =
+          localStorage.getItem("bio") || "";
+        document.getElementById("editTheme").value =
+          localStorage.getItem("theme") || "light";
+        document.getElementById("avatarPreview").src =
+          localStorage.getItem("avatar") || "https://i.pravatar.cc/100?img=3";
+
+        modal.classList.add("show");
+      }
+
+      function closeProfileModal() {
+        const modal = document.getElementById("editProfileModal");
+        modal.classList.remove("show");
+      }
+
+      function updateAvatarPreview() {
+        const gender = document.getElementById("editGender").value;
+        const base = gender === "female" ? 30 : gender === "male" ? 10 : 20;
+        const randomId = base + Math.floor(Math.random() * 10);
+        const avatarURL = `https://i.pravatar.cc/100?img=${randomId}`;
+        document.getElementById("avatarPreview").src = avatarURL;
+      }
+
+      function saveProfile(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("editName").value.trim();
+        const email = document.getElementById("editEmail").value.trim();
+        const gender = document.getElementById("editGender").value;
+        const dob = document.getElementById("editDOB").value;
+        const bio = document.getElementById("editBio").value.trim();
+        const theme = document.getElementById("editTheme").value;
+        const avatarURL = document.getElementById("avatarPreview").src;
+
+        localStorage.setItem("username", name);
+        localStorage.setItem("email", email);
+        localStorage.setItem("gender", gender);
+        localStorage.setItem("dob", dob);
+        localStorage.setItem("bio", bio);
+        localStorage.setItem("theme", theme);
+        localStorage.setItem("avatar", avatarURL);
+
+        document.documentElement.setAttribute("data-theme", theme);
+        document.querySelector(".profile-info h3").textContent = name;
+        document.querySelector(".profile-info p").textContent = email;
+        document.querySelector(".avatar").src = avatarURL;
+
+        closeProfileModal();
       }
     </script>
   </body>
