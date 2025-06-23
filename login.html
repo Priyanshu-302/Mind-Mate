@@ -31,7 +31,7 @@
     <div class="login-container">
       <div class="login-card" data-aos="zoom-in">
         <h2>Login to <span>Mind Mate</span></h2>
-        <form>
+        <form onsubmit="goToDashboard(event)">
           <div class="form-group">
             <label for="username">Username</label>
             <input
@@ -61,6 +61,11 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();
+
+      function goToDashboard(e) {
+        e.preventDefault(); // Prevent form submission
+        window.location.href = "dashboard.html"; // Redirect
+      }
     </script>
   </body>
 </html>

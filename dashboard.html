@@ -20,125 +20,168 @@
       sizes="512x512"
       href="android-chrome-512x512.png"
     />
-    <title>Dashboard | MindMate</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Dashboard | Mind Mate</title>
   </head>
   <body>
-    <div class="sidebar">
-      <h2>MindMate</h2>
-      <ul>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="chat.html">Chat Assistant</a></li>
-        <li><a href="mood.html">Mood Journal</a></li>
-        <li><a href="resources.html">Resources</a></li>
-        <li><a href="#">Nearby Clinics</a></li>
-        <li><a href="profile.html">Profile</a></li>
-      </ul>
-    </div>
-
-    <div class="main">
-      <div class="navbar">
-        <h2>Dashboard</h2>
-        <div class="user-info">
-          <span>Welcome, <strong id="username">User</strong></span>
-          <label class="switch">
-            <input type="checkbox" id="theme-toggle" />
-            <span class="slider"></span>
-          </label>
-          <button class="logout-btn" onclick="logout()">Logout</button>
-        </div>
-      </div>
-
-      <div class="content">
-        <h1>Welcome, <span id="greet">User</span> 👋</h1>
-        <p>
-          This is your personalized MindMate dashboard. Access all your mental
-          wellness tools here: AI chat, journaling, resources, and nearby help.
-          We're with you every step of the way.
-        </p>
-        <div class="cards">
-          <div class="card">
-            <h3>AI Chat Assistant</h3>
-            <p>
-              Speak to your AI companion to share how you feel and receive
-              intelligent, empathetic feedback.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Mood Journal</h3>
-            <p>
-              Record your emotions and daily experiences to better understand
-              your mental health trends.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Resources</h3>
-            <p>
-              Access curated tools, guides, and emergency contacts to help
-              manage your emotional well-being.
-            </p>
-          </div>
-
-          <div class="card">
-            <h3>Nearby Clinics</h3>
-            <p>
-              Find support by viewing mental health clinics and hotlines in your
-              area.
-            </p>
+    <header>
+      <div class="logo">Mind Mate</div>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="#">Mood Log</a>
+        <a href="#">Chat Assistant</a>
+        <a href="#">Nearby Clinics</a>
+        <a href="#">Goals</a>
+        <a href="landing.html">Logout</a>
+        <div class="notification-wrapper">
+          <button class="notification-btn" onclick="toggleNotifications()">
+            🔔
+          </button>
+          <div class="notification-dropdown" id="notificationDropdown">
+            <p class="notification-title">Notifications</p>
+            <ul>
+              <li>🧘 Daily mood check-in available</li>
+              <li>📅 New goal reminder: Journal tonight</li>
+              <li>📍 Nearby therapy center update</li>
+            </ul>
           </div>
         </div>
-      </div>
+        <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
+      </nav>
+    </header>
 
-      <footer>
-        <p>&copy; 2025 MindMate | All rights reserved</p>
-      </footer>
-    </div>
-
-    <button
-      class="chat-ai-btn"
-      onclick="window.location.href='chat.html'"
-      title="Chat with AI"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="22"
-        height="22"
-        fill="currentColor"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M8 0a8 8 0 0 0-7.446 11.032c-.144.347-.48.75-.804.977-.33.23-.28.56.172.663.655.151 1.64.36 2.447.545A7.963 7.963 0 0 0 8 16a8 8 0 0 0 0-16zM5.5 6.5a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2.5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm2.5 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z"
+    <section class="profile-widget" data-aos="fade-down">
+      <div class="profile-card">
+        <img
+          src="https://i.pravatar.cc/100?img=3"
+          alt="User Profile"
+          class="avatar"
         />
-      </svg>
-    </button>
+        <div class="profile-info">
+          <h3>Priyanshu Das</h3>
+          <p>dasp98458@gmail.com</p>
+          <button class="edit-btn">Edit Profile</button>
+        </div>
+      </div>
+    </section>
 
+    <main class="dashboard">
+      <div class="card" data-aos="fade-up">
+        <h3>📈 Mood Overview</h3>
+        <p>Track your emotional patterns and insights from the past week.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <h3>🤖 AI Check-in Bot</h3>
+        <p>
+          Talk to your AI companion and reflect on how you're feeling today.
+        </p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="200">
+        <h3>🏆 Self-Care Goals</h3>
+        <p>Stay motivated with your daily and weekly mental health tasks.</p>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="300">
+        <h3>📍 Nearby Support</h3>
+        <p>Find therapists and support centers near your location instantly.</p>
+      </div>
+    </main>
+
+    <section data-aos="fade-up">
+      <h2>🎯 Progress Tracker</h2>
+      <p>Your current XP level: <strong>Level 5</strong></p>
+      <div
+        style="
+          background-color: #e0e0e0;
+          border-radius: 10px;
+          height: 20px;
+          margin-top: 0.5rem;
+        "
+      >
+        <div
+          style="
+            height: 100%;
+            width: 70%;
+            background-color: var(--primary);
+            border-radius: 10px;
+          "
+        ></div>
+      </div>
+    </section>
+
+    <section data-aos="fade-up">
+      <h2>🔥 Self-Care Challenges</h2>
+      <ul>
+        <li>✅ Meditate for 10 minutes</li>
+        <li>✅ Journal your mood daily</li>
+        <li>⬜ Take a 15-min nature walk</li>
+        <li>⬜ Sleep 8 hours for 3 nights</li>
+      </ul>
+    </section>
+
+    <section data-aos="fade-up" style="background-color: var(--card)">
+      <h2>📚 Resources</h2>
+      <ul>
+        <li><a href="#">🧠 5 Ways to Boost Mental Fitness</a></li>
+        <li><a href="#">📺 Mindfulness Basics - YouTube</a></li>
+        <li><a href="#">📖 Free Therapy eBook</a></li>
+      </ul>
+    </section>
+
+    <section data-aos="zoom-in">
+      <blockquote>
+        "You don't have to control your thoughts. You just have to stop letting
+        them control you." — Dan Millman
+      </blockquote>
+    </section>
+
+    <footer>&copy; 2025 MindMate | Your Mental Health Companion</footer>
+
+    <!-- Chatbot Button -->
+    <button class="chatbot-btn" onclick="toggleChatbot()">💬</button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      // Apply dark mode if previously selected
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        document.getElementById("theme-toggle").checked = true;
+      AOS.init();
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem("theme") || "light";
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      });
+
+      function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
       }
 
-      // Toggle theme on checkbox change
-      document
-        .getElementById("theme-toggle")
-        .addEventListener("change", function () {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", this.checked ? "dark" : "light");
-        });
+      function toggleMenu() {
+        const nav = document.querySelector("nav");
+        nav.classList.toggle("active");
+      }
 
-      // Optional: greet the user by name
-      const user = localStorage.getItem("username") || "User";
-      document.getElementById("username").textContent = user;
-      document.getElementById("greet").textContent = user;
+      function toggleNotifications() {
+        const dropdown = document.getElementById("notificationDropdown");
+        dropdown.classList.toggle("active");
+      }
 
-      function logout() {
-        const confirmLogout = confirm("Are you sure you want to log out?");
-        if (confirmLogout) {
-          localStorage.removeItem("username");
-          window.location.href = "landing.html";
+      window.addEventListener("click", (e) => {
+        const btn = document.querySelector(".notification-btn");
+        const dropdown = document.getElementById("notificationDropdown");
+        if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.remove("active");
         }
+      });
+
+      function toggleChatbot() {
+        const modal = document.getElementById("chatbotModal");
+        modal.classList.toggle("show");
       }
     </script>
   </body>

@@ -31,7 +31,7 @@
     <div class="login-container">
       <div class="login-card" data-aos="zoom-in">
         <h2>Create your <span>Account</span></h2>
-        <form>
+        <form onsubmit="goToLogin(event)">
           <div class="form-group">
             <label for="username">Username</label>
             <input
@@ -70,6 +70,11 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();
+
+      function goToLogin(e) {
+        e.preventDefault(); // Prevent form submission
+        window.location.href = "login.html"; // Redirect
+      }
     </script>
   </body>
 </html>
