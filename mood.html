@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mood Journal | MindMate</title>
+    <title>Mood Log | MindMate</title>
     <link rel="stylesheet" href="mood.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
@@ -21,129 +21,170 @@
       sizes="512x512"
       href="android-chrome-512x512.png"
     />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="toggle-wrapper">
-      <label class="switch">
-        <input type="checkbox" id="theme-toggle" />
-        <span class="slider"></span>
-      </label>
-    </div>
+    <header>
+      <h1>Mood Log</h1>
+      <button class="toggle-theme" onclick="toggleTheme()">🌓</button>
+    </header>
 
-    <div class="journal-container">
-      <h1>Mood Journal</h1>
+    <main>
+      <section data-aos="fade-up">
+        <h2>🧠 How are you feeling today?</h2>
+        <form id="moodForm">
+          <div class="mood-options">
+            <input type="radio" name="mood" id="happy" value="😊" />
+            <label for="happy">😊</label>
 
-      <form class="journal-form" onsubmit="saveEntry(event)">
-        <label for="date">Date</label>
-        <input type="date" id="date" required />
+            <input type="radio" name="mood" id="sad" value="😢" />
+            <label for="sad">😢</label>
 
-        <label for="mood">Current Mood</label>
-        <select id="mood" required>
-          <option value="">Select your mood</option>
-          <option value="Happy">😊 Happy</option>
-          <option value="Sad">😢 Sad</option>
-          <option value="Anxious">😟 Anxious</option>
-          <option value="Excited">😃 Excited</option>
-          <option value="Angry">😠 Angry</option>
-          <option value="Tired">😴 Tired</option>
-        </select>
+            <input type="radio" name="mood" id="angry" value="😠" />
+            <label for="angry">😠</label>
 
-        <label for="note">Your Thoughts</label>
-        <textarea
-          id="note"
-          placeholder="Write about your day or feelings..."
-        ></textarea>
+            <input type="radio" name="mood" id="excited" value="🤩" />
+            <label for="excited">🤩</label>
 
-        <div class="button-group">
-          <button type="submit" class="save-entry">Save Entry</button>
-          <button
-            type="button"
-            class="back-btn"
-            onclick="window.location.href='dashboard.html'"
-          >
-            Back
-          </button>
+            <input type="radio" name="mood" id="meh" value="😐" />
+            <label for="meh">😐</label>
+          </div>
+          <textarea id="note" placeholder="Write a quick note..."></textarea>
+          <button type="submit">Log Mood</button>
+        </form>
+      </section>
+
+      <section data-aos="fade-up" data-aos-delay="100">
+        <h2>🏆 Your XP Progress</h2>
+        <p>
+          XP: <strong id="xp">0</strong> | Level: <strong id="level">1</strong>
+        </p>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" id="xpBar"></div>
         </div>
+      </section>
 
-        <!--This gives suggestion based on the mood-->
-        <div id="suggestion"></div>
-      </form>
-    </div>
+      <section data-aos="fade-up" data-aos-delay="200">
+        <h2>🔥 Your Streak</h2>
+        <p class="streak">Current streak: <span id="streak">0</span> days</p>
+        <p class="remainder">📅 Don't forget to log your mood every day!</p>
+      </section>
 
+      <section data-aos="fade-up" data-aos-delay="300">
+        <h2>📘 Mood History</h2>
+        <div id="logs"></div>
+      </section>
+
+      <section data-aos="fade-up" data-aos-delay="400">
+        <h2>💡 Daily Mood Tip</h2>
+        <div class="tip" id="tipBox">Loading tip...</div>
+      </section>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-      // Enable dark mode on load if previously selected
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-        const toggle = document.getElementById("theme-toggle");
-        if (toggle) toggle.checked = true;
+      AOS.init();
+
+      const moodForm = document.getElementById("moodForm");
+      const logs = document.getElementById("logs");
+      const xpEl = document.getElementById("xp");
+      const levelEl = document.getElementById("level");
+      const xpBar = document.getElementById("xpBar");
+      const streakEl = document.getElementById("streak");
+      const tipBox = document.getElementById("tipBox");
+
+      let moodLog = JSON.parse(localStorage.getItem("moodLog")) || [];
+      let xp = parseInt(localStorage.getItem("xp")) || 0;
+      let level = parseInt(localStorage.getItem("level")) || 1;
+      let streak = parseInt(localStorage.getItem("streak")) || 0;
+      let lastDate = localStorage.getItem("lastLogDate") || "";
+
+      const tips = [
+        "Take a deep breath and count to 5.",
+        "Drink some water and stretch for 2 minutes.",
+        "Journaling can help you understand your emotions.",
+        "Take a 10-minute walk and get fresh air.",
+        "Listen to your favorite calming music.",
+      ];
+
+      function displayTip() {
+        tipBox.textContent = tips[Math.floor(Math.random() * tips.length)];
       }
 
-      // Dark mode toggle logic
-      const themeToggle = document.getElementById("theme-toggle");
-      if (themeToggle) {
-        themeToggle.addEventListener("change", function () {
-          document.body.classList.toggle("dark-mode");
-          localStorage.setItem("theme", this.checked ? "dark" : "light");
-        });
+      function displayLogs() {
+        logs.innerHTML = moodLog
+          .map(
+            (entry) =>
+              `<div class="log-item">${entry.mood} - ${new Date(
+                entry.date
+              ).toLocaleString()}<br><em>${entry.note || "No note"}</em></div>`
+          )
+          .join("");
       }
 
-      function saveEntry(event) {
-        event.preventDefault();
-
-        const date = document.getElementById("date").value;
-        const mood = document.getElementById("mood").value;
-        const note = document.getElementById("note").value.trim();
-
-        if (!date || !mood) {
-          alert("Please fill in the date and mood.");
-          return;
+      function updateXP() {
+        xpEl.textContent = xp;
+        levelEl.textContent = level;
+        xpBar.style.width = (xp % 100) + "%";
+        if (xp >= 100) {
+          level++;
+          xp = xp % 100;
+          localStorage.setItem("level", level);
         }
-
-        const entry = { date, mood, note };
-        const existing = JSON.parse(localStorage.getItem("mood_journal")) || [];
-        existing.unshift(entry);
-        localStorage.setItem("mood_journal", JSON.stringify(existing));
-
-        document.getElementById("date").value = "";
-        document.getElementById("mood").value = "";
-        document.getElementById("note").value = "";
-
-        // Mood-based suggestion
-        const moodSuggestions = {
-          Happy: "Keep doing what brings you joy! 😊",
-          Sad: "Take time for yourself and talk to someone you trust. 💙",
-          Anxious: "Try breathing exercises or journaling your worries. 🌿",
-          Excited:
-            "Capture this excitement and share your energy with others! ✨",
-          Angry:
-            "Take deep breaths and step away from what's bothering you. 🔥",
-          Tired: "Give yourself permission to rest. Your body deserves it. 😴",
-        };
-        const suggestionText =
-          moodSuggestions[mood] || "Thanks for sharing your thoughts.";
-        document.getElementById("suggestion").textContent = suggestionText;
-
-        loadEntries();
+        localStorage.setItem("xp", xp);
       }
 
-      function loadEntries() {
-        const container = document.getElementById("entries");
-        const entries = JSON.parse(localStorage.getItem("mood_journal")) || [];
-        container.innerHTML = "";
-
-        entries.forEach((entry) => {
-          const div = document.createElement("div");
-          div.className = "entry";
-          div.innerHTML = `
-          <h3>${entry.mood}</h3>
-          <small>${entry.date}</small>
-          <p>${entry.note}</p>
-        `;
-          container.appendChild(div);
-        });
+      function updateStreak(currentDate) {
+        if (!lastDate) {
+          streak = 1;
+        } else {
+          const last = new Date(lastDate);
+          const curr = new Date(currentDate);
+          const diff = (curr - last) / (1000 * 3600 * 24);
+          if (diff < 1) return; // already logged today
+          else if (diff === 1) streak++;
+          else streak = 1;
+        }
+        lastDate = currentDate;
+        localStorage.setItem("lastLogDate", lastDate);
+        localStorage.setItem("streak", streak);
+        streakEl.textContent = streak;
       }
 
-      window.onload = loadEntries;
+      function toggleTheme() {
+        const html = document.documentElement;
+        const theme =
+          html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", theme);
+      }
+
+      moodForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const mood = moodForm.mood.value;
+        const note = document.getElementById("note").value.trim();
+        if (!mood) return alert("Please select a mood!");
+
+        const date = new Date().toISOString();
+        moodLog.unshift({ mood, note, date });
+        localStorage.setItem("moodLog", JSON.stringify(moodLog));
+
+        xp += 10;
+        updateXP();
+        updateStreak(date);
+        displayLogs();
+        displayTip();
+        moodForm.reset();
+      });
+
+      // On load
+      displayLogs();
+      updateXP();
+      updateStreak(new Date().toISOString());
+      displayTip();
     </script>
   </body>
 </html>
